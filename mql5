@@ -1,0 +1,87 @@
+mql5
+//+------------------------------------------------------------------+
+//|                                 FCPI Indicator for MT5           |
+//|                                      forexroboteasy.com          |
+//|                                      Forex Robot Easy Team        |
+//+------------------------------------------------------------------+
+#property copyright 'forexroboteasy.com'
+#property link      'forexroboteasy.com'
+#property version   '1.00'
+#property strict
+
+// Input parameters
+input ENUM_CALCULATION_METHOD CalculationMethod=PRICE_POWER; // Calculation method selection
+
+// Currency pairs
+string MajorPairs[]={'EURUSD','GBPUSD','AUDUSD','NZDUSD','USDCAD','USDCHF','USDJPY'}; // Major pairs
+string CrossPairs[]={'EURGBP','EURAUD','EURNZD','EURCAD','EURCHF','EURJPY','GBPAUD','GBPNZD','GBPCAD','GBPCHF','GBPJPY','AUDNZD','AUDCAD','AUDCHF','AUDJPY','NZDCAD','NZDCHF','NZDJPY','CADCHF','CADJPY'}; // Cross pairs
+string AllPairs[]; // All currency pairs
+
+//+------------------------------------------------------------------+
+//| Custom indicator initialization function                         |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+   // Initialize all currency pairs
+   ArrayCopy(AllPairs,MajorPairs);
+   ArrayResize(AllPairs,ArraySize(AllPairs)+ArraySize(CrossPairs));
+   ArrayCopy(AllPairs,ArraySize(MajorPairs),CrossPairs);
+
+   // Print all currency pairs
+   Print('All Currency Pairs: ',ArrayToString(AllPairs));
+
+   return(INIT_SUCCEEDED);
+}
+
+//+------------------------------------------------------------------+
+//| Custom indicator iteration function                              |
+//+------------------------------------------------------------------+
+int OnCalculate(const int rates_total,
+                const int prev_calculated,
+                const datetime &time[],
+                const double &open[],
+                const double &high[],
+                const double &low[],
+                const double &close[],
+                const long &tick_volume[],
+                const long &volume[],
+                const int &spread[])
+{
+   // Calculate currency power index based on selected calculation method
+   if(CalculationMethod==PRICE_POWER)
+   {
+      // Perform calculation using Price Power method
+      CalculatePricePower();
+   }
+   else if(CalculationMethod==ADX_POWER)
+   {
+      // Perform calculation using ADX Power method
+      CalculateADXPower();
+   }
+
+   return(rates_total);
+}
+
+//+------------------------------------------------------------------+
+//| Calculate currency power using Price Power method                |
+//+------------------------------------------------------------------+
+void CalculatePricePower()
+{
+   // Perform calculation using Price Power method
+   // Add your code here
+
+   // Print calculation result
+   Print('Price Power Calculation Done');
+}
+
+//+------------------------------------------------------------------+
+//| Calculate currency power using ADX Power method                   |
+//+------------------------------------------------------------------+
+void CalculateADXPower()
+{
+   // Perform calculation using ADX Power method
+   // Add your code here
+
+   // Print calculation result
+   Print('ADX Power Calculation Done');
+}
